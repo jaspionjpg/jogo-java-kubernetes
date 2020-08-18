@@ -24,6 +24,9 @@ ENTRYPOINT ["java","-jar","/app.jar"]
 # exemplo para rodar o kubernetes
 # https://www.youtube.com/watch?v=o8Nwdku_Cj0
 
+# doc ingress
+# https://docs.traefik.io/v1.7/user-guide/kubernetes/
+
 # criando maquina virtual kubernetes
 # minikube -p dev.to start --cpus 2 --memory=4098
 # minikube -p dev.to addons enable ingress
@@ -44,6 +47,7 @@ ENTRYPOINT ["java","-jar","/app.jar"]
 # rodar dashboard do cluster local
 # minikube -p dev.to dashboard -- http://192.168.99.100:30000/#!/cluster?namespace=dev-to
 # k logs -f -n dev-to {{name pod}}
+# http://dev.local/app/hello
 
 # export url
 # kubectl port-forward -n dev-to <pod_name> 8080:8080
@@ -54,3 +58,26 @@ ENTRYPOINT ["java","-jar","/app.jar"]
 # minikube service -n dev-to jogo --url
 
 
+
+
+
+#TODO
+#Ingress
+#metadata:
+#  annotations:
+#    traefik.ingress.kubernetes.io/service-weights: |
+#      my-app: 99%
+#      my-app-canary: 1%
+#  name: my-app
+#spec:
+#  rules:
+#  - http:
+#      paths:
+#      - backend:
+#          serviceName: my-app
+#          servicePort: 80
+#        path: /
+#      - backend:
+#          serviceName: my-app-canary
+#          servicePort: 80
+#        path: /

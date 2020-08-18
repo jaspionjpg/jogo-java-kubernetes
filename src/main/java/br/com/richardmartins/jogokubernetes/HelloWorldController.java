@@ -9,7 +9,7 @@ import java.net.UnknownHostException;
 @RestController
 public class HelloWorldController {
 
-    @RequestMapping("/hello")
+    @RequestMapping("/meu-ip")
     public String sayHello() throws UnknownHostException {
         InetAddress ip = InetAddress.getLocalHost();
         System.out.println("Your current host/IP address : " + ip);
