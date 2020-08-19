@@ -1,0 +1,33 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: jogo-virtual-service
+  namespace: teste
+spec:
+  hosts:
+    - jogo
+  http:
+  - route:
+    - destination:
+        host: jogo
+        subset: jogo-atual
+      weight: 90
+    - destination:
+        host: jogo
+        subset: jogo-ab
+      weight: 10
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: jogo-destination-rule
+  namespace: teste
+spec:
+  host: jogo
+  subsets:
+  - name: jogo-atual
+    labels:
+      greeting: atual
+  - name: jogo-ab
+    labels:
+      greeting: ab

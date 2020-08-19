@@ -1,0 +1,78 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jogo-atual
+  namespace: teste
+  labels:
+    app: jogo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: jogo
+  template:
+      metadata:
+        labels:
+          app: jogo
+          greeting: atual
+      spec:
+        containers:
+          - name: jogo
+            image: jogokubernetes:latest
+            imagePullPolicy: Never
+            ports:
+              - containerPort: 8080
+                name: http
+            envFrom:
+              - configMapRef:
+                  name: jogo
+            livenessProbe:
+              httpGet:
+                path: /app/actuator/health/liveness
+                port: 8080
+              initialDelaySeconds: 30
+            readinessProbe:
+              httpGet:
+                path: /app/actuator/health/readiness
+                port: 8080
+              initialDelaySeconds: 30
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jogo-ab
+  namespace: teste
+  labels:
+    app: jogo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: jogo
+  template:
+    metadata:
+      labels:
+        app: jogo
+        greeting: ab
+    spec:
+      containers:
+        - name: jogo
+          image: jogokubernetes-ab:latest
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 8080
+              name: http
+          envFrom:
+            - configMapRef:
+                name: jogo
+          livenessProbe:
+            httpGet:
+              path: /app/actuator/health/liveness
+              port: 8080
+            initialDelaySeconds: 30
+          readinessProbe:
+            httpGet:
+              path: /app/actuator/health/readiness
+              port: 8080
+            initialDelaySeconds: 30
+

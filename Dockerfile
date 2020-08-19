@@ -4,7 +4,7 @@ RUN mkdir /usr/myapp
 COPY build/libs/*.jar app.jar
 WORKDIR /usr/myapp
 EXPOSE 8080
-ENTRYPOINT ["java","-jar","/app.jar"]
+ENTRYPOINT [ "sh", "-c", "java --enable-preview $JAVA_OPTS -jar app.jar" ]
 
 # Criando projeto Spring WEB/Gradle/Java11
 
