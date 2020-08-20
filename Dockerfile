@@ -51,8 +51,9 @@ ENTRYPOINT [ "sh", "-c", "java --enable-preview $JAVA_OPTS -jar /app.jar" ]
 # k logs -f -n dev-to {{name pod}}
 # http://dev.local/app/hello
 
-# export url
-# kubectl port-forward -n dev-to <pod_name> 8080:8080
+# debbugando
+# kubectl get pods -n dev-to
+# kubectl port-forward -n dev-to <pod_name> 5005:5005
 # escala a aplicação
 # kubectl -n dev-to scale deployment/jogo --replicas=3
 
@@ -62,7 +63,8 @@ ENTRYPOINT [ "sh", "-c", "java --enable-preview $JAVA_OPTS -jar /app.jar" ]
 
 
 
-
+#while true; do curl "http://192.168.99.104:31219/app/meu-ip"; echo; sleep 2; done
+#
 #TODO
 #Ingress
 #metadata:
@@ -83,3 +85,4 @@ ENTRYPOINT [ "sh", "-c", "java --enable-preview $JAVA_OPTS -jar /app.jar" ]
 #          serviceName: my-app-canary
 #          servicePort: 80
 #        path: /
+

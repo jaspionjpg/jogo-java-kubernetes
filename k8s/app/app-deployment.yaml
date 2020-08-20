@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: jogo
-  namespace: outrojogo
+  namespace: jogo
   labels:
     app: jogo
 spec:

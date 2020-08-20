@@ -2,7 +2,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: jogo
-  namespace: outrojogo
+  namespace: jogo
 data:
   DATABASE_SERVER_NAME: "mysql"
   DATABASE_USER_NAME: "jogo"

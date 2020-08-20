@@ -1,8 +1,12 @@
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: jogo
-  namespace: outrojogo
+  name: jogo-ingress
+  namespace: jogo
+  annotations:
+    traefik.ingress.kubernetes.io/service-weights: |
+      jogo-ab: 50%
+      jogo-atual: 50%
 spec:
   rules:
     - host: dev.local
@@ -10,5 +14,9 @@ spec:
         paths:
           - path: /app
             backend:
-              serviceName: jogo
+              serviceName: jogo-atual
+              servicePort: 8080
+          - path: /app
+            backend:
+              serviceName: jogo-ab
               servicePort: 8080

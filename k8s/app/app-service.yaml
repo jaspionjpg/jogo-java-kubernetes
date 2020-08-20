@@ -2,7 +2,7 @@ kind: Service
 apiVersion: v1
 metadata:
   name: jogo
-  namespace: outrojogo
+  namespace: jogo
 spec:
   selector:
     app: jogo
