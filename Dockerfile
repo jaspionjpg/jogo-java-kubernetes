@@ -4,14 +4,16 @@ RUN mkdir /usr/myapp
 COPY build/libs/*.jar app.jar
 WORKDIR /usr/myapp
 EXPOSE 8080
-ENTRYPOINT [ "sh", "-c", "java --enable-preview $JAVA_OPTS -jar app.jar" ]
+ENTRYPOINT [ "sh", "-c", "java --enable-preview $JAVA_OPTS -jar /app.jar" ]
 
 # Criando projeto Spring WEB/Gradle/Java11
+#sudo docker run --name mysql57 -p 3306:3306 -e MYSQL_ROOT_PASSWORD=123456 -e MYSQL_USER=java -e MYSQL_PASSWORD=1234 -e MYSQL_DATABASE=k8s_java -d mysql/mysql-server:5.7
+#docker stop mysql57
 
 # buildando imagem java
 # ./gradlew clean build
-# sudo docker build --force-rm -t jogokubernetes-teste  .
-# sudo docker run --name jogo -p 8080:8080 -d -t jogokubernetes-teste:latest
+# sudo docker build --force-rm -t jogokubernetes  .
+# sudo docker run --name jogo -p 8080:8080 -d -t jogokubernetes:latest
 # sudo docker logs -f 084
 
 # parando imagem docker
@@ -29,17 +31,17 @@ ENTRYPOINT [ "sh", "-c", "java --enable-preview $JAVA_OPTS -jar app.jar" ]
 
 # criando maquina virtual kubernetes
 # minikube -p dev.to start --cpus 2 --memory=4098
-# minikube -p dev.to addons enable ingress
-# minikube -p dev.to addons enable metrics-server
+# minikube -p desenv2 addons enable ingress
+# minikube -p desenv2 addons enable metrics-server
 # kubectl create namespace dev-to
-
+#minikube start --kubernetes-version v1.18.0
 
 # deploy application configs
 # kubectl apply -f k8s/app/
 # kubectl delete -f k8s/app/
 
 # deploy apllication docker
-# eval $(minikube -p dev.to docker-env) && docker build --force-rm -t java-k8s .
+# eval $(minikube -p desenv2 docker-env) && docker build --force-rm -t jogokubernetes .
 
 # check application
 # kubectl get pods -n dev-to

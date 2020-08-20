@@ -2,7 +2,7 @@ apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: jogo
-  namespace: teste
+  namespace: outrojogo
 spec:
   rules:
     - host: dev.local
